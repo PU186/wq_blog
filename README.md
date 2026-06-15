@@ -45,7 +45,7 @@ summary: 文章摘要
 #    仓库名可以是 wq-blog 或 wangqianhit.me
 
 # 2. 关联并推送
-git remote add origin https://github.com/PU186/wq-blog.git
+git remote add origin https://github.com/PU186/wq_blog.git
 git branch -M main
 git push -u origin main
 ```
@@ -117,7 +117,12 @@ python -m docx2md 文档.docx 文档.md
 - [CloudConvert](https://cloudconvert.com/docx-to-md)
 - [Convertio](https://convertio.co/zh/docx-md/)
 
-## 📁 项目结构
+## � 许可协议
+
+本博客内容采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可协议。
+转载请注明出处。
+
+## �📁 项目结构
 
 ```
 WQ_Blog/
