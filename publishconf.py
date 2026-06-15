@@ -7,7 +7,7 @@ sys.path.append(os.path.dirname(__file__))
 from pelicanconf import *
 
 # 生产环境设置
-SITEURL = 'https://wangqianhit.me'
+SITEURL = 'https://blog.wangqianhit.me'
 RELATIVE_URLS = False
 
 # 生产环境 Feed 全部开启

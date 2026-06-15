@@ -1,4 +1,4 @@
-# 王前的博客 - wangqianhit.me
+# 王前的博客 - blog.wangqianhit.me
 
 个人博客，使用 [Pelican](https://getpelican.com/) 静态网站生成器构建，托管在 [Cloudflare Pages](https://pages.cloudflare.com/)。
 
@@ -45,7 +45,7 @@ summary: 文章摘要
 #    仓库名可以是 wq-blog 或 wangqianhit.me
 
 # 2. 关联并推送
-git remote add origin https://github.com/PU186/wq_blog.git
+git remote add origin git@github.com:PU186/wq_blog.git
 git branch -M main
 git push -u origin main
 ```

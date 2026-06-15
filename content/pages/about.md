@@ -10,7 +10,7 @@ slug: about
 
 ### 关于这个网站
 
-这是我的个人博客，域名是 [wangqianhit.me](https://wangqianhit.me)，托管在 Cloudflare Pages 上。
+这是我的个人博客，域名是 [blog.wangqianhit.me](https://blog.wangqianhit.me)，托管在 Cloudflare Pages 上。
 
 ### 联系方式
 
