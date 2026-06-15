@@ -1,7 +1,5 @@
 ---
 title: 欢迎来到我的博客
-date: 2026-06-15 10:00
-modified: 2026-06-15 10:00
 category: 生活
 tags: 博客, 开始, 介绍
 slug: hello-world
