@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}{{ SITENAME }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">{{ SITETITLE }}</h1>
+        <p class="hero-subtitle">{{ SITESUBTITLE }}</p>
+        {% if SITEDESCRIPTION %}
+        <p class="hero-desc">{{ SITEDESCRIPTION }}</p>
+        {% endif %}
+    </div>
+</section>
+
+<section class="article-list">
+    {% if articles %}
+    <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-pen-fancy"></i> 最新文章</h2>
+    </div>
+
+    {% for article in articles_page.object_list %}
+    <article class="post-card">
+        <div class="post-card-body">
+            <h3 class="post-title">
+                <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark">{{ article.title }}</a>
+            </h3>
+            <div class="post-meta">
+                <time datetime="{{ article.date.isoformat() }}">
+                    <i class="far fa-calendar-alt"></i> {{ article.date.strftime('%Y-%m-%d') }}
+                </time>
+                {% if article.category %}
+                <span class="post-category">
+                    <i class="far fa-folder-open"></i>
+                    <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+                </span>
+                {% endif %}
+                {% if article.tags %}
+                <span class="post-tags">
+                    <i class="fas fa-tags"></i>
+                    {% for tag in article.tags %}
+                    <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">#{{ tag }}</a>
+                    {% endfor %}
+                </span>
+                {% endif %}
+            </div>
+            {% if article.summary %}
+            <div class="post-summary">
+                {{ article.summary }}
+            </div>
+            {% endif %}
+            <a href="{{ SITEURL }}/{{ article.url }}" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </article>
+    {% endfor %}
+
+    {% if articles_page %}
+    <div class="pagination">
+        {% if articles_page.has_previous() %}
+        <a href="{{ SITEURL }}/{{ articles_previous_page.url }}" class="page-link">
+            <i class="fas fa-chevron-left"></i> 上一页
+        </a>
+        {% endif %}
+        <span class="page-info">第 {{ articles_page.number }} / {{ articles_paginator.num_pages }} 页</span>
+        {% if articles_page.has_next() %}
+        <a href="{{ SITEURL }}/{{ articles_next_page.url }}" class="page-link">
+            下一页 <i class="fas fa-chevron-right"></i>
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-pencil-alt"></i>
+        <h3>暂无文章</h3>
+        <p>正在准备中，敬请期待...</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}归档 - {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<section class="archive-page">
+    <header class="archive-header">
+        <h1><i class="fas fa-archive"></i> 文章归档</h1>
+        <p>共 {{ articles|length }} 篇文章</p>
+    </header>
+
+    {% set grouped = articles|groupby('date.year') %}
+    {% for year, year_articles in grouped %}
+    <div class="archive-year">
+        <h2 class="year-title">{{ year }}</h2>
+        <div class="archive-list">
+            {% for article in year_articles %}
+            <div class="archive-item">
+                <time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%m-%d') }}</time>
+                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                <span class="archive-category">{{ article.category }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}

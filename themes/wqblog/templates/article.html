@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }} - {{ SITENAME }}{% endblock %}
+
+{% block extra_head %}
+<meta name="description" content="{{ article.summary|striptags|truncate(150) }}">
+{% endblock %}
+
+{% block content %}
+<article class="article-detail">
+    <header class="article-header">
+        <h1 class="article-title">{{ article.title }}</h1>
+        <div class="article-meta">
+            <time datetime="{{ article.date.isoformat() }}">
+                <i class="far fa-calendar-alt"></i> {{ article.date.strftime('%Y年%m月%d日') }}
+            </time>
+            {% if article.modified %}
+            <span class="article-modified">
+                <i class="far fa-edit"></i> 更新于 {{ article.modified.strftime('%Y-%m-%d') }}
+            </span>
+            {% endif %}
+            {% if article.category %}
+            <span class="article-category">
+                <i class="far fa-folder-open"></i>
+                <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+            </span>
+            {% endif %}
+
+        </div>
+        {% if article.tags %}
+        <div class="article-tags">
+            {% for tag in article.tags %}
+            <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">#{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </header>
+
+    <div class="article-content">
+        {{ article.content }}
+    </div>
+
+    <footer class="article-footer">
+        <div class="article-nav">
+            {% if article.prev_article %}
+            <a href="{{ SITEURL }}/{{ article.prev_article.url }}" class="article-nav-link prev">
+                <i class="fas fa-chevron-left"></i>
+                <span>{{ article.prev_article.title }}</span>
+            </a>
+            {% endif %}
+            {% if article.next_article %}
+            <a href="{{ SITEURL }}/{{ article.next_article.url }}" class="article-nav-link next">
+                <span>{{ article.next_article.title }}</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            {% endif %}
+        </div>
+    </footer>
+</article>
+{% endblock %}

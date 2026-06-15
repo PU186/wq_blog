@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}#{{ tag }} - {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<section class="archive-page">
+    <header class="archive-header">
+        <h1><i class="fas fa-tag"></i> 标签：{{ tag }}</h1>
+        <p>共 {{ articles|length }} 篇文章</p>
+    </header>
+
+    <div class="archive-list">
+        {% for article in articles %}
+        <div class="archive-item">
+            <time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%Y-%m-%d') }}</time>
+            <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

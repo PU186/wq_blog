@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}标签 - {{ SITENAME }}{% endblock %}
+
+{% block content %}
+<section class="tags-page">
+    <header class="archive-header">
+        <h1><i class="fas fa-tags"></i> 所有标签</h1>
+        <p>共 {{ tags|length }} 个标签</p>
+    </header>
+
+    <div class="tag-cloud">
+        {% for tag, articles in tags|sort %}
+        <a href="{{ SITEURL }}/{{ tag.url }}" class="tag-cloud-item">
+            #{{ tag }}
+            <span class="tag-count">{{ articles|length }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

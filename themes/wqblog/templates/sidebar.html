@@ -1,0 +1,88 @@
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+        <!-- 站点标识 -->
+        <div class="sidebar-header">
+            <a href="{{ SITEURL }}/" class="sidebar-brand">
+                <span class="sidebar-logo">{{ SITENAME|first }}</span>
+                <span class="sidebar-title">{{ SITENAME }}</span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose" aria-label="关闭侧边栏">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- 导航菜单 -->
+        <nav class="sidebar-nav">
+            <h3 class="sidebar-section-title"><i class="fas fa-compass"></i> 导航</h3>
+            <ul class="sidebar-menu">
+                {% for title, link in MENUITEMS %}
+                <li>
+                    <a href="{{ link if link.startswith('/') else SITEURL + '/' + link.lstrip('/') }}" class="sidebar-link">
+                        {% set icon_map = {
+                            '首页': 'fas fa-home',
+                            '归档': 'fas fa-archive',
+                            '标签': 'fas fa-tags',
+                            '关于': 'fas fa-user',
+                        } %}
+                        <i class="{{ icon_map.get(title, 'fas fa-link') }}"></i>
+                        <span>{{ title }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <!-- 分类 -->
+        {% if categories %}
+        <div class="sidebar-section">
+            <h3 class="sidebar-section-title"><i class="fas fa-folder-open"></i> 分类</h3>
+            <ul class="sidebar-tag-list">
+                {% for cat, articles in categories %}
+                <li>
+                    <a href="{{ SITEURL }}/{{ cat.url }}" class="sidebar-tag">
+                        {{ cat }}
+                        <span class="sidebar-count">{{ articles|length }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <!-- 标签 -->
+        {% if tags %}
+        <div class="sidebar-section">
+            <h3 class="sidebar-section-title"><i class="fas fa-tags"></i> 标签</h3>
+            <div class="sidebar-tags">
+                {% for tag, articles in tags[:10] %}
+                <a href="{{ SITEURL }}/{{ tag.url }}" class="sidebar-tag-item">#{{ tag }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 社交链接 -->
+        <div class="sidebar-section sidebar-social">
+            <h3 class="sidebar-section-title"><i class="fas fa-link"></i> 链接</h3>
+            <div class="sidebar-social-links">
+                {% for name, url in SOCIAL %}
+                <a href="{{ url }}" target="_blank" rel="noopener" title="{{ name }}" class="sidebar-social-link">
+                    {% if 'github' in name|lower %}
+                    <i class="fab fa-github"></i>
+                    {% elif 'email' in name|lower or '@' in url %}
+                    <i class="fas fa-envelope"></i>
+                    {% elif 'orcid' in name|lower %}
+                    <i class="fab fa-orcid"></i>
+                    {% else %}
+                    <i class="fas fa-globe"></i>
+                    {% endif %}
+                    <span>{{ name }}</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- 侧边栏遮罩 -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
