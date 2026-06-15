@@ -70,10 +70,13 @@
             sidebar.classList.toggle('collapsed');
             isCollapsed = sidebar.classList.contains('collapsed');
             localStorage.setItem('sidebarCollapsed', isCollapsed);
-            // 更新图标
-            var icon = sidebarToggle ? sidebarToggle.querySelector('i') : null;
-            if (icon) {
-                icon.className = isCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
+            // 更新按钮提示和图标
+            if (sidebarToggle) {
+                var icon = sidebarToggle.querySelector('i');
+                if (icon) {
+                    icon.className = isCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
+                }
+                sidebarToggle.title = isCollapsed ? '展开侧边栏' : '收起侧边栏';
             }
         }
     }
@@ -85,8 +88,11 @@
     // 恢复侧边栏折叠状态
     if (sidebar && isCollapsed && window.innerWidth > 1024) {
         sidebar.classList.add('collapsed');
-        var icon = sidebarToggle ? sidebarToggle.querySelector('i') : null;
-        if (icon) icon.className = 'fas fa-chevron-right';
+        if (sidebarToggle) {
+            var icon = sidebarToggle.querySelector('i');
+            if (icon) icon.className = 'fas fa-chevron-right';
+            sidebarToggle.title = '展开侧边栏';
+        }
     }
 
     if (hamburger) {

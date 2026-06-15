@@ -1,7 +1,4 @@
 <aside class="sidebar" id="sidebar">
-    <button class="sidebar-collapse-btn" id="sidebarToggle" title="收起侧边栏">
-        <i class="fas fa-chevron-left"></i>
-    </button>
     <div class="sidebar-inner">
         <!-- 站点标识 + 头像 -->
         <div class="sidebar-header">
@@ -47,6 +44,34 @@
             </ul>
         </nav>
 
+        <!-- 联系信息（同导航样式） -->
+        <nav class="sidebar-nav">
+            <h3 class="sidebar-section-title"><i class="fas fa-address-card"></i> 联系</h3>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="https://github.com/PU186" class="sidebar-link" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                        <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:25b901072@stu.hit.edu.cn" class="sidebar-link" target="_blank" rel="noopener">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                        <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://orcid.org/0009-0003-1228-1989" class="sidebar-link" target="_blank" rel="noopener">
+                        <i class="fab fa-orcid"></i>
+                        <span>ORCID</span>
+                        <i class="fas fa-external-link-alt external-icon"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
         <!-- 分类 -->
         {% if categories %}
         <div class="sidebar-section">
@@ -76,26 +101,6 @@
         </div>
         {% endif %}
 
-        <!-- 社交链接 -->
-        <div class="sidebar-section sidebar-social">
-            <h3 class="sidebar-section-title"><i class="fas fa-link"></i> 链接</h3>
-            <div class="sidebar-social-links">
-                {% for name, url in SOCIAL %}
-                <a href="{{ url }}" target="_blank" rel="noopener" title="{{ name }}" class="sidebar-social-link">
-                    {% if 'github' in name|lower %}
-                    <i class="fab fa-github"></i>
-                    {% elif 'email' in name|lower or '@' in url %}
-                    <i class="fas fa-envelope"></i>
-                    {% elif 'orcid' in name|lower %}
-                    <i class="fab fa-orcid"></i>
-                    {% else %}
-                    <i class="fas fa-globe"></i>
-                    {% endif %}
-                    <span>{{ name }}</span>
-                </a>
-                {% endfor %}
-            </div>
-        </div>
     </div>
 </aside>
 

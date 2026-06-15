@@ -959,15 +959,15 @@ img {
 }
 
 /* ============================================
-   侧边栏折叠按钮
+   侧边栏折叠按钮（浮动）
    ============================================ */
-.sidebar-collapse-btn {
-    position: absolute;
+.sidebar-toggle-float {
+    position: fixed;
     top: 50%;
-    right: -14px;
+    left: var(--sidebar-width);
     transform: translateY(-50%);
-    width: 28px;
-    height: 48px;
+    width: 20px;
+    height: 52px;
     background: var(--sidebar-bg);
     border: 1px solid var(--border);
     border-left: none;
@@ -977,12 +977,13 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
-    transition: all 0.3s;
-    font-size: 0.8rem;
+    z-index: 910;
+    transition: left 0.3s ease, background 0.2s;
+    font-size: 0.7rem;
+    padding: 0;
 }
 
-.sidebar-collapse-btn:hover {
+.sidebar-toggle-float:hover {
     color: var(--accent);
     background: var(--accent-light);
 }
@@ -994,7 +995,11 @@ img {
     border-right: none;
 }
 
-.sidebar.collapsed + .layout-wrapper {
+.sidebar.collapsed ~ .sidebar-toggle-float {
+    left: 0;
+}
+
+.sidebar.collapsed ~ .layout-wrapper {
     margin-left: 0;
 }
 
@@ -1252,7 +1257,7 @@ img {
         display: block;
     }
 
-    .sidebar-collapse-btn {
+    .sidebar-toggle-float {
         display: none;
     }
 
