@@ -49,7 +49,7 @@ ARCHIVES_URL = 'archives/'
 ARCHIVES_SAVE_AS = 'archives/index.html'
 
 # 静态文件
-STATIC_PATHS = ['images', 'extra']
+STATIC_PATHS = ['images', 'extra', 'articles/lab-images']
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
     'extra/favicon.ico': {'path': 'favicon.ico'},
