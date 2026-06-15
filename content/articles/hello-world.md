@@ -44,10 +44,10 @@ summary: 这是我的第一篇博客文章，欢迎来到这里！
 
 ```python
 def greet(name):
-    """打招呼函数"""
-    return f"你好，{name}！"
 
-print(greet("世界"))
+    return f"hello {name}！"
+
+print(greet("world"))
 ```
 
 | 功能 | 状态 |
@@ -63,7 +63,6 @@ print(greet("世界"))
 
 - 📝 技术学习笔记
 - 🔧 项目实战经验
-- 📖 读书心得
 - 💭 生活随想
 
 ---

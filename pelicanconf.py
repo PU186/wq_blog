@@ -31,10 +31,12 @@ AUTHOR_FEED_RSS = None
 DEFAULT_PAGINATION = 10
 DEFAULT_CATEGORY = '未分类'
 USE_FOLDER_AS_CATEGORY = False
+DEFAULT_DATE = 'fs'
+DEFAULT_DATE_FORMAT = '%Y-%m-%d %H:%M'
 
-# 文章 URL 设置
-ARTICLE_URL = 'posts/{date:%Y}/{date:%m}/{slug}/'
-ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/{slug}/index.html'
+# 文章 URL 设置（不再依赖日期）
+ARTICLE_URL = 'posts/{slug}/'
+ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
 PAGE_URL = '{slug}/'
 PAGE_SAVE_AS = '{slug}/index.html'
 CATEGORY_URL = 'category/{slug}/'
@@ -113,6 +115,8 @@ MARKDOWN = {
     },
     'output_format': 'html5',
 }
+
+WITH_FUTURE_DATE = True
 
 # 主题配置
 THEME_CONFIG = {
