@@ -72,7 +72,7 @@ MENUITEMS = (
     ('首页', '/'),
     ('归档', '/archives/'),
     ('标签', '/tags/'),
-    ('关于', '/pages/about/'),
+    ('关于', '/about/'),
     ('简历', 'https://resume.wangqianhit.me/'),
 )
 
