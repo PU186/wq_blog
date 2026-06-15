@@ -3,43 +3,96 @@
 
 {% block extra_head %}
 <meta name="description" content="{{ article.summary|striptags|truncate(150) }}">
+<meta property="article:published_time" content="{{ article.date.isoformat() }}">
+{% if article.modified %}
+<meta property="article:modified_time" content="{{ article.modified.isoformat() }}">
+{% endif %}
 {% endblock %}
 
 {% block content %}
 <article class="article-detail">
     <header class="article-header">
         <h1 class="article-title">{{ article.title }}</h1>
-        <div class="article-meta">
-            <time datetime="{{ article.date.isoformat() }}">
-                <i class="far fa-calendar-alt"></i> {{ article.date.strftime('%Y年%m月%d日') }}
-            </time>
-            {% if article.modified %}
-            <span class="article-modified">
-                <i class="far fa-edit"></i> 更新于 {{ article.modified.strftime('%Y-%m-%d') }}
-            </span>
-            {% endif %}
-            {% if article.category %}
-            <span class="article-category">
-                <i class="far fa-folder-open"></i>
-                <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
-            </span>
-            {% endif %}
 
+        <!-- 时间轴信息 -->
+        <div class="article-timeline">
+            <div class="timeline-item">
+                <i class="far fa-calendar-check"></i>
+                <div class="timeline-content">
+                    <span class="timeline-label">发布时间</span>
+                    <time datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%Y年%m月%d日 %H:%M') }}</time>
+                </div>
+            </div>
+            {% if article.modified %}
+            <div class="timeline-item">
+                <i class="far fa-edit"></i>
+                <div class="timeline-content">
+                    <span class="timeline-label">最后修改</span>
+                    <time datetime="{{ article.modified.isoformat() }}">{{ article.modified.strftime('%Y年%m月%d日 %H:%M') }}</time>
+                </div>
+            </div>
+            {% endif %}
+            <div class="timeline-item">
+                <i class="far fa-folder-open"></i>
+                <div class="timeline-content">
+                    <span class="timeline-label">分类</span>
+                    {% if article.category %}
+                    <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+                    {% else %}
+                    <span>未分类</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% if article.tags %}
+            <div class="timeline-item">
+                <i class="fas fa-tags"></i>
+                <div class="timeline-content">
+                    <span class="timeline-label">标签</span>
+                    <div class="timeline-tags">
+                        {% for tag in article.tags %}
+                        <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">#{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </div>
-        {% if article.tags %}
-        <div class="article-tags">
-            {% for tag in article.tags %}
-            <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">#{{ tag }}</a>
-            {% endfor %}
-        </div>
-        {% endif %}
+
     </header>
+
+    <!-- 文章目录 (TOC) - 由 JS 自动生成 -->
+    <div class="article-toc">
+        <div class="toc-title"><i class="fas fa-list"></i> 文章目录</div>
+    </div>
 
     <div class="article-content">
         {{ article.content }}
     </div>
 
+    <!-- 相关文章 -->
+    {% if article.related_posts %}
+    <section class="related-posts">
+        <h2 class="section-title"><i class="fas fa-link"></i> 相关文章</h2>
+        <div class="related-list">
+            {% for related in article.related_posts %}
+            <a href="{{ SITEURL }}/{{ related.url }}" class="related-item">
+                <span class="related-title">{{ related.title }}</span>
+                <time>{{ related.date.strftime('%Y-%m-%d') }}</time>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
     <footer class="article-footer">
+        <!-- 跳转简历 -->
+        <div class="resume-promo">
+            <a href="https://resume.wangqianhit.me/" target="_blank" rel="noopener" class="resume-link">
+                <i class="fas fa-file-alt"></i>
+                <span>查看我的个人简历 →</span>
+            </a>
+        </div>
+
         <div class="article-nav">
             {% if article.prev_article %}
             <a href="{{ SITEURL }}/{{ article.prev_article.url }}" class="article-nav-link prev">

@@ -100,7 +100,8 @@ img {
     border-right: 1px solid var(--border);
     z-index: 900;
     overflow-y: auto;
-    transition: transform 0.3s ease;
+    overflow-x: hidden;
+    transition: transform 0.3s ease, width 0.3s ease;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -946,6 +947,287 @@ img {
 }
 
 /* ============================================
+   侧边栏头像
+   ============================================ */
+.sidebar-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+    border: 2px solid var(--accent-light);
+}
+
+/* ============================================
+   侧边栏折叠按钮
+   ============================================ */
+.sidebar-collapse-btn {
+    position: absolute;
+    top: 50%;
+    right: -14px;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 48px;
+    background: var(--sidebar-bg);
+    border: 1px solid var(--border);
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s;
+    font-size: 0.8rem;
+}
+
+.sidebar-collapse-btn:hover {
+    color: var(--accent);
+    background: var(--accent-light);
+}
+
+/* 侧边栏折叠状态 */
+.sidebar.collapsed {
+    width: 0;
+    overflow: hidden;
+    border-right: none;
+}
+
+.sidebar.collapsed + .layout-wrapper {
+    margin-left: 0;
+}
+
+/* ============================================
+   固定主题切换按钮
+   ============================================ */
+.fixed-theme-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 999;
+    box-shadow: 0 4px 16px rgba(108, 92, 231, 0.3);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixed-theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(108, 92, 231, 0.4);
+}
+
+/* ============================================
+   文章时间轴
+   ============================================ */
+.article-timeline {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex: 1 1 200px;
+    min-width: 140px;
+}
+
+.timeline-item i {
+    color: var(--accent);
+    font-size: 1rem;
+    margin-top: 2px;
+}
+
+.timeline-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.timeline-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.timeline-content time,
+.timeline-content a,
+.timeline-content span {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.timeline-content a:hover {
+    color: var(--accent);
+}
+
+.timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.timeline-tags .tag {
+    font-size: 0.8rem;
+    padding: 1px 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 10px;
+}
+
+/* ============================================
+   文章目录 (TOC)
+   ============================================ */
+.article-toc {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+}
+
+.toc-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.article-toc .toc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.article-toc .toc li {
+    margin-bottom: 4px;
+}
+
+.article-toc .toc a {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+.article-toc .toc a:hover {
+    color: var(--accent);
+    background: var(--accent-light);
+}
+
+.article-toc .toc .toc {
+    padding-left: 20px;
+    margin-top: 2px;
+}
+
+/* ============================================
+   相关文章
+   ============================================ */
+.related-posts {
+    margin: 40px 0;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.related-posts .section-title {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+.related-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.related-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    color: var(--text-primary);
+}
+
+.related-item:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.related-item time {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* ============================================
+   简历跳转链接
+   ============================================ */
+.resume-promo {
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 16px;
+}
+
+.resume-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--accent), #fd79a8);
+    color: #fff;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 16px rgba(108, 92, 231, 0.2);
+}
+
+.resume-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(108, 92, 231, 0.35);
+    color: #fff;
+}
+
+.resume-link i {
+    font-size: 1.2rem;
+}
+
+/* ============================================
+   外部链接图标
+   ============================================ */
+.external-icon {
+    font-size: 0.7rem !important;
+    margin-left: auto;
+    opacity: 0.5;
+}
+
+/* ============================================
    响应式 - 平板及以下
    ============================================ */
 @media (max-width: 1024px) {
@@ -958,12 +1240,20 @@ img {
         transform: translateX(0);
     }
 
+    .sidebar.collapsed {
+        width: var(--sidebar-width);
+    }
+
     .sidebar-overlay.active {
         display: block;
     }
 
     .sidebar-close {
         display: block;
+    }
+
+    .sidebar-collapse-btn {
+        display: none;
     }
 
     .layout-wrapper {
@@ -1009,6 +1299,14 @@ img {
 
     .container {
         padding: 0 20px;
+    }
+
+    .fixed-theme-toggle {
+        bottom: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
     }
 }
 

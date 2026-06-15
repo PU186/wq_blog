@@ -9,7 +9,8 @@ RELATIVE_URLS = True
 SITETITLE = "王前的博客"
 SITESUBTITLE = '记录学习与成长'
 SITEDESCRIPTION = '王前的个人博客，分享技术、生活与思考'
-SITELOGO = '/images/avatar.png'
+SITELOGO = 'https://github.com/PU186.png'
+# 使用 GitHub 头像作为博客头像
 
 PATH = 'content'
 THEME = 'themes/wqblog'
@@ -29,7 +30,7 @@ AUTHOR_FEED_RSS = None
 # 博客设置
 DEFAULT_PAGINATION = 10
 DEFAULT_CATEGORY = '未分类'
-USE_FOLDER_AS_CATEGORY = True
+USE_FOLDER_AS_CATEGORY = False
 
 # 文章 URL 设置
 ARTICLE_URL = 'posts/{date:%Y}/{date:%m}/{slug}/'
@@ -72,11 +73,29 @@ MENUITEMS = (
     ('归档', '/archives/'),
     ('标签', '/tags/'),
     ('关于', '/pages/about/'),
+    ('简历', 'https://resume.wangqianhit.me/'),
 )
 
-# 插件（后续可扩展）
-PLUGIN_PATHS = ['plugins']
-PLUGINS = []
+# 插件
+PLUGINS = ['sitemap', 'related_posts']
+
+# Sitemap 插件配置
+SITEMAP = {
+    'format': 'xml',
+    'priorities': {
+        'articles': 0.8,
+        'indexes': 0.5,
+        'pages': 0.6,
+    },
+    'changefreqs': {
+        'articles': 'monthly',
+        'indexes': 'daily',
+        'pages': 'monthly',
+    },
+}
+
+# Related Posts 插件配置
+RELATED_POSTS_MAX = 5
 
 # Markdown 扩展
 MARKDOWN = {

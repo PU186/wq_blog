@@ -1,3 +1,5 @@
 pelican>=4.9,<5.0
 markdown>=3.4,<4.0
 ghp-import>=2.0
+pelican-sitemap>=1.2
+pelican-related-posts>=1.0

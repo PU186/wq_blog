@@ -1,9 +1,16 @@
 <aside class="sidebar" id="sidebar">
+    <button class="sidebar-collapse-btn" id="sidebarToggle" title="收起侧边栏">
+        <i class="fas fa-chevron-left"></i>
+    </button>
     <div class="sidebar-inner">
-        <!-- 站点标识 -->
+        <!-- 站点标识 + 头像 -->
         <div class="sidebar-header">
             <a href="{{ SITEURL }}/" class="sidebar-brand">
+                {% if SITELOGO %}
+                <img src="{{ SITELOGO }}" alt="avatar" class="sidebar-avatar">
+                {% else %}
                 <span class="sidebar-logo">{{ SITENAME|first }}</span>
+                {% endif %}
                 <span class="sidebar-title">{{ SITENAME }}</span>
             </a>
             <button class="sidebar-close" id="sidebarClose" aria-label="关闭侧边栏">
@@ -17,15 +24,23 @@
             <ul class="sidebar-menu">
                 {% for title, link in MENUITEMS %}
                 <li>
+                    {% if link.startswith('http') or link.startswith('//') %}
+                    <a href="{{ link }}" class="sidebar-link" target="_blank" rel="noopener">
+                    {% else %}
                     <a href="{{ link if link.startswith('/') else SITEURL + '/' + link.lstrip('/') }}" class="sidebar-link">
+                    {% endif %}
                         {% set icon_map = {
                             '首页': 'fas fa-home',
                             '归档': 'fas fa-archive',
                             '标签': 'fas fa-tags',
                             '关于': 'fas fa-user',
+                            '简历': 'fas fa-file-alt',
                         } %}
                         <i class="{{ icon_map.get(title, 'fas fa-link') }}"></i>
                         <span>{{ title }}</span>
+                        {% if link.startswith('http') %}
+                        <i class="fas fa-external-link-alt external-icon"></i>
+                        {% endif %}
                     </a>
                 </li>
                 {% endfor %}

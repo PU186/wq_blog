@@ -12,7 +12,7 @@ RELATIVE_URLS = False
 
 # 生产环境 Feed 全部开启
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
-CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
+CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
 # 删除输出目录，确保干净构建
 DELETE_OUTPUT_DIRECTORY = True
