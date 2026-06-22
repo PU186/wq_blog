@@ -1,5 +1,6 @@
 ---
 title: 2026年哈工大本科生毕业课题技术文档
+date: 2026-06-22
 category: 科研
 tags: 毕业设计, 交接文档, 嵌入式, 图像处理, 物联网
 slug: hit-undergrad-thesis-2026

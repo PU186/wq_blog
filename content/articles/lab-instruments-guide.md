@@ -1,5 +1,6 @@
 ---
 title: 与长辈的相处之道（实验室各仪器避坑指南）
+date: 2026-06-09
 category: 科研
 tags: 实验室, 仪器, 经验
 slug: lab-instruments-guide
