@@ -22,7 +22,7 @@ WSLg 只能显示单个 GUI 窗口，不支持完整桌面环境。而我需要�
 
 | 方案 | 优点 | 缺点 | 结论 |
 |------|------|------|------|
-| Docker | 隔离干净 | Windows Docker 安装失败（0x80072eff 网络问题）；无 GUI | ❌ 放弃 |
+| Docker | 隔离干净 | 本质是嵌套虚拟化（WSL2 上跑 Docker Desktop = VM 里套 VM），且容器无 systemd、无持久会话，搭建 GUI 桌面需层层穿透（X11 forwarding / 嵌套 VNC），与"在真实 Linux 桌面上测试"的目标相悖 | ❌ 不适用 |
 | WSL2 直接导入 | 轻量、快速 | 需手动装 xrdp | ✅ 采用 |
 | Hyper-V 虚拟机 | 完整 GUI | 重量级、占资源多 | 备选 |
 | WSLg | 开箱即用 | **只支持单窗口，不支持完整桌面**（[Microsoft 官方文档](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)确认） | ❌ 不够 |
