@@ -22,8 +22,8 @@ WSLg 只能显示单个 GUI 窗口，不支持完整桌面环境。而我需要�
 
 | 方案 | 优点 | 缺点 | 结论 |
 |------|------|------|------|
-| Docker | 隔离干净 | 本质是嵌套虚拟化（WSL2 上跑 Docker Desktop = VM 里套 VM），且容器无 systemd、无持久会话，搭建 GUI 桌面需层层穿透（X11 forwarding / 嵌套 VNC），与"在真实 Linux 桌面上测试"的目标相悖 | ❌ 不适用 |
-| WSL2 直接导入 | 轻量、快速 | 需手动装 xrdp | ✅ 采用 |
+| Docker | 隔离干净、可复现、CI/CD 友好 | Docker Desktop on Windows **底层就是 WSL2**（[官方架构](https://docs.docker.com/desktop/features/linux/)），所以"不用 WSL 直接用 Docker"是伪命题——你并没有绕开 WSL2，只是多套了一层。对 GUI 桌面场景：容器无 systemd → 手动管理 dbus/xrdp 生命周期；无持久会话 → 每次重建容器桌面配置丢失；需要额外装 VNC + 窗口管理器 → 跟 WSL2 方案一样复杂但多一层隔离开销。Docker 更适合**无头打包/CI**，不适合**交互式 GUI 测试** | ❌ 本场景不适用 |
+| WSL2 直接导入 | 轻量、快速、与 Windows 文件系统互通 | 需手动装 xrdp | ✅ 采用 |
 | Hyper-V 虚拟机 | 完整 GUI | 重量级、占资源多 | 备选 |
 | WSLg | 开箱即用 | **只支持单窗口，不支持完整桌面**（[Microsoft 官方文档](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)确认） | ❌ 不够 |
 
