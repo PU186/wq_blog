@@ -4,8 +4,8 @@ date: 2026-09-27
 category: 技术
 tags: WSL2, xrdp, Xvnc, Xfce4, Linux, 远程桌面, 麒麟, PyInstaller
 slug: wsl2-xrdp-xfce4-guide
-authors: 王前
-summary: 记录在 Windows WSL2 中通过 xrdp + TigerVNC + Xfce4 搭建 Linux 图形桌面，以完成 Python Web 应用在银河麒麟 V10 上的打包与可视化验证。重点分析了 root 账号锁定、.xsession 配置错误、Xorg 后端不可用等问题的排查与解决。
+authors: 王前, GitHub Copilot
+summary: 记录在 Windows WSL2 中通过 xrdp + TigerVNC + Xfce4 搭建 Linux 图形桌面，以完成 Python Web 应用在银河麒麟 V10 上的打包与可视化验证。重点分析了 root 账号锁定、.xsession 配置错误、Xorg 后端不可用等问题的排查与解决。本文在 AI 辅助下完成。
 ---
 
 ## 1 问题背景
@@ -211,12 +211,10 @@ usermod -aG tsusers root
 
 ## 8 参考文献
 
-1. [Microsoft WSLg 文档](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
-2. [xrdp GitHub Wiki - Troubleshooting](https://github.com/neutrinolabs/xrdp/wiki/Troubleshooting)
-3. [C-nergy: xrdp install on Ubuntu 20.04](https://c-nergy.be/blog/?p=17310)
-4. [Ubuntu Cloud Images](https://cloud-images.ubuntu.com/)
-5. [xrdp sesman.ini 配置](https://github.com/neutrinolabs/xrdp/blob/sesman/sesman.ini)
-6. [TigerVNC](https://tigervnc.org/)
+1. [Microsoft: Run Linux GUI apps with WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps) — WSLg 仅支持单窗口 GUI，不提供完整桌面
+2. [Docker Desktop: Linux VM architecture](https://docs.docker.com/desktop/features/linux/) — Docker Desktop on Windows 基于 WSL2 运行
+3. [xrdp Wiki: Tips and FAQ — Backend 选择](https://github.com/neutrinolabs/xrdp/wiki/Tips-and-FAQ#how-to-choose-backend-xorgxrdp-vs-xvnc) — Xvnc vs Xorgxrdp 后端对比
+4. [TigerVNC: Xvnc man page](https://tigervnc.org/doc/Xvnc.html) — Xvnc 纯软件渲染 VNC server
 
 ## 9 小结
 
@@ -228,3 +226,7 @@ xrdp 的 `login failed for display 0` 错误信息具有误导性——它不区
 4. WSL2 中应使用 Xvnc — Xorg 无 GPU 支持
 
 此外，Ubuntu cloud image 默认锁定 root 账号，在 xrdp 场景下是一个容易忽略的坑点。建议 xrdp-sesman 在 PAM 认证失败时输出更明确的日志，以减少排查耗时。
+
+---
+
+*本文在 GitHub Copilot 辅助下完成。问题排查与解决方案由人工实践验证，AI 协助了文献检索、日志分析与文档撰写。*
