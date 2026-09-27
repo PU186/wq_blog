@@ -195,7 +195,7 @@ usermod -aG tsusers root
 
 ## 6 验证结果
 
-![WSL2 + Xvnc 远程桌面成功连接](WSL2andXvnctoLinux.png)
+![WSL2 + Xvnc 远程桌面成功连接]({attach}WSL2andXvnctoLinux.png)
 
 ## 7 配置清单
 
