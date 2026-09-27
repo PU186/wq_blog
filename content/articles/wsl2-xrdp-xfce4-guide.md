@@ -1,5 +1,5 @@
 ---
-title: 记一次 Python Web 应用麒麟 V10 打包——基于 WSL2 与 Xvnc 的远程桌面验证实践
+title: 基于 WSL2 与 Xvnc 的远程桌面验证
 date: 2026-09-27
 category: 技术
 tags: WSL2, xrdp, Xvnc, Xfce4, Linux, 远程桌面, 麒麟, PyInstaller
